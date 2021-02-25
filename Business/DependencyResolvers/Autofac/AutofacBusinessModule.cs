@@ -19,11 +19,16 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<ProductManager>().As<IProductService>().SingleInstance();
             builder.RegisterType<EfProductDal>().As<IProductDal>().SingleInstance();
 
-            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            builder.RegisterType<CategoryManager>().As<ICategoryService>().SingleInstance();
+            builder.RegisterType<EfCategoryDal>().As<ICategoryDal>().SingleInstance();
 
+            // Çalışan programlar içinde,
+            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            // implemente edilmiş interfaceleri buluyor
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
                 .EnableInterfaceInterceptors(new ProxyGenerationOptions()
                 {
+                    // Onlar için AspectInterceptorSelector'u çağırır.
                     Selector = new AspectInterceptorSelector()
                 }).SingleInstance();
         }
