@@ -76,7 +76,19 @@ namespace Business.Concrete
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Update(Product product)
         {
-            throw new NotImplementedException();
+            // business codes
+            IResult result = BusinessRules.Run(
+                CheckIfProductNameExists(product.ProductName),
+                CheckIfProductCountOfCategoryCorrect(product.CategoryId),
+                CheckIfCategoryLimitExceded());
+
+            if (result != null)
+            {
+                return result;
+            }
+
+            _productDal.Update(product);
+            return new SuccessResult(Messages.ProductUpdated);
         }
 
         private IResult CheckIfProductCountOfCategoryCorrect(int categoryId)
