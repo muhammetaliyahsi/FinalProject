@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+// JWT --> JSON Web Token
+namespace Core.Utilities.Security.JWT
+{
+    public class AccessToken
+    {
+        public string Token { get; set; }
+        public DateTime Expiration { get; set; }
+    }
+}
