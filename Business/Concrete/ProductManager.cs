@@ -34,7 +34,7 @@ namespace Business.Concrete
 
 
         // claim--> tırnak içinde yazılan yetkilendilirelen kısım "admin,editor","product.add,admin" gibi şeyler de olabilir.
-        [SecuredOperation("product.add")]
+        //[SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(ProductValidator))]
         // Update yapılınca bellekteki tüm IProductSerive Get'lerini siler.
         [CacheRemoveAspect("IProductService.Get")]
