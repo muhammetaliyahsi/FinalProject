@@ -34,7 +34,7 @@ namespace Business.Concrete
 
 
         // claim--> tırnak içinde yazılan yetkilendilirelen kısım "admin,editor","product.add,admin" gibi şeyler de olabilir.
-        //[SecuredOperation("product.add,admin")]
+        [SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(ProductValidator))]
         // Update yapılınca bellekteki tüm IProductSerive Get'lerini siler.
         [CacheRemoveAspect("IProductService.Get")]
@@ -60,7 +60,7 @@ namespace Business.Concrete
         [CacheAspect]
         public IDataResult<List<Product>> GetAll()
         {
-            if (DateTime.Now.Hour == 22)
+            if (DateTime.Now.Hour == 10)
             {
                 return new ErrorDataResult<List<Product>>(Messages.MaintenanceTime);
             }
